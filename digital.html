@@ -5,6 +5,8 @@
   <title>TikTok-Simulator Modern – bessere Ad-Personalisierung</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
   <style>
     html, body {
@@ -15,12 +17,15 @@
       background: #000;
     }
 
+    /* ================= APP LAYOUT ================= */
     .app {
       display: flex;
+      flex-direction: row;
       height: 100vh;
       width: 100vw;
     }
 
+    /* Post + icons area */
     .image-area {
       flex: 1;
       display: flex;
@@ -36,11 +41,9 @@
       aspect-ratio: 3/4;
       border-radius: 20px;
       overflow: hidden;
-
       background: #0f0f0f;
       border: 2px solid rgba(255,255,255,0.18);
       box-shadow: 0 12px 40px rgba(0,0,0,0.55);
-
       display: flex;
       align-items: center;
       justify-content: center;
@@ -82,13 +85,7 @@
       justify-content: center;
     }
 
-    .post-frame img,
-    .post-frame iframe{
-      border: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
+    /* ================= ICONS ================= */
     .icons {
       position: absolute;
       right: calc(50% - 320px);
@@ -124,6 +121,7 @@
       cursor: not-allowed;
     }
 
+    /* ================= AI SECTION ================= */
     .ai-section {
       width: 320px;
       max-width: 36vw;
@@ -153,6 +151,7 @@
       scroll-behavior: smooth;
     }
 
+    /* ================= QUIZ ================= */
     #quizOverlay {
       position: fixed;
       inset: 0;
@@ -222,6 +221,7 @@
       color: #fff;
     }
 
+    /* ================= RESPONSIVE ================= */
     @media (max-width: 860px){
       .app{
         flex-direction: column;
@@ -230,80 +230,85 @@
         width: 100%;
         max-width: 100%;
         min-width: 0;
-        height: 32vh;
+        height: 30vh;
+        margin-top: 8px;
       }
-      .image-area{
-        height: 68vh;
-      }
+    
       .icons{
-        right: 18px;
+        right: 12px;
         top: 50%;
         transform: translateY(-50%);
       }
       .post-frame{
-        width: 86%;
-        max-width: 420px;
+        width: 90%;
+      }
+
+  .image-area {
+    min-height: 300px; /* fallback si vh foire */
+    height: 70vh;
+  }
+
+  .post-frame {
+    width: 90%;
+    max-height: 100%;
+  }
+
+  #postMedia {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+      .ai-header{
+        font-size: 1.3em;
+      }
+      #log{
+        font-size: 0.85em;
+        min-height: 60px;
+        max-height: 150px;
       }
     }
 
-      .icon-btn {
-      width: 72px;
-      height: 72px;
-      }
-
-      .icon-btn .material-icons {
-      font-size: 34px;
-      }
-
-      .ai-header {
-        font-size: 1.9em;
-      }
-
-      #log {
-        font-size: 1.05em;
-        line-height: 1.5em;
-      }
-
-
-
-/* ----------------- Media Query  ---------------------*/
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2.2em;
+    /* ================= FUNDING LOGO ================= */
+  .funding {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 20;
+    opacity: 0.85;
+    pointer-events: none;
   }
 
-  p {
-    font-size: 1.15em;
-    line-height: 1.6em;
+  .funding-text {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
   }
 
-  button {
-    font-size: 1em;
-    padding: 1em 2.2em;
+  .funding img {
+    height: 28px;
+    max-width: 120px;
+    object-fit: contain;
   }
 
-  .emoji {
-    font-size: 3.8em;
+  /* Mobile optimization */
+  @media (max-width: 860px) {
+    .funding {
+      bottom: 6px;
+      opacity: 0.75;
+    }
+
+    .funding-text {
+      font-size: 0.6rem;
+    }
+
+    .funding img {
+      height: 22px;
+      max-width: 90px;
+    }
   }
-}
-
-@media (max-width: 600px) {
-  #quizBox {
-    font-size: 1.05em;
-  }
-
-  .option-btn {
-    font-size: 1.1em;
-    padding: 18px;
-  }
-
-  #quizResults {
-    font-size: 1em;
-    line-height: 1.5em;
-  }
-}
-
-
 
   </style>
 </head>
@@ -559,10 +564,15 @@
 
       function appendLog(html){
         const log = document.getElementById('log');
-        const wasAtBottom = (log.scrollHeight - log.scrollTop - log.clientHeight) < 12;
-        log.insertAdjacentHTML('beforeend', html);
-        if (wasAtBottom) log.scrollTop = log.scrollHeight;
-      }
+        if(window.innerWidth <= 860){
+          // mobile: remplace le log
+          log.innerHTML = html;
+        } else {
+          // desktop: ajoute à la suite
+          const wasAtBottom = (log.scrollHeight - log.scrollTop - log.clientHeight) < 12;
+          log.insertAdjacentHTML('beforeend', html);
+          if (wasAtBottom) log.scrollTop = log.scrollHeight;
+        }}
 
       function maybeEndOrNext(){
         if (currentIndex >= shuffledContent.length - 1){
@@ -853,6 +863,19 @@
 
               ${timingHtml}
 
+              <div style="margin-top:10px;">
+                <strong>Details (alle Kategorien):</strong><br>
+                ${table.map(t => {
+                  const a = t.actions;
+                  return `
+                    <strong>${t.cat}</strong>:
+                    Score/Imp ${t.scorePerImp.toFixed(2)},
+                    Dwell ${t.avgDwellSec.toFixed(2)}s,
+                    Imp ${t.impressions},
+                    L${a.like}/C${a.comment}/S${a.share}/K${a.skip}
+                  `;
+                }).join('<br>')}
+              </div>
             
 
               <div id="replayBtn">🔄 NOCHMAL SPIELEN</div>
@@ -875,6 +898,11 @@
       init();
     })();
   </script>
+
+<div class="funding">
+  <div class="funding-text">gefördert durch</div>
+  <img src="BMFWF_Logo.png" alt="Förderlogo" />
+</div>
+
 </body>
 </html>
-
