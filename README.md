@@ -3,9 +3,9 @@
 Ein Mini‑Tool, welches Social-Media Algorithmen vereinfacht veranschaulicht.
 Der TikTok‑Simulator ist ein spielerisches Lern-Tool, das zeigt, wie soziale Medien anhand unseres Verhaltens (Likes, Kommentare, Klicks, Verweildauer…) ein Profil über unsere Interessen erstellen – und darauf aufbauend personalisierte Werbung anzeigen.
 Die Mini‑App wurde im Rahmen von Digital Navigator 2.0 – Sicher durch stürmische Gezeiten entwickelt und richtet sich an
-➡️ Mädchen & junge Frauen,
-➡️ Eltern (insb. Mütter) und
-➡️ Multiplikator:innen / Beratungsstellen.
+- ➡️ Mädchen & junge Frauen,
+- ➡️ Eltern (insb. Mütter) und
+- ➡️ Multiplikator:innen / Beratungsstellen.
 Sie dient als niederschwelliger Einstieg, um zu verstehen:
 
 - wie Algorithmen funktionieren
@@ -44,6 +44,9 @@ Alles ist so gestaltet, dass keine echten Daten gespeichert werden. Alles passie
 <h2>🚀 Wie nutze ich die Mini‑App und was passiert mit meinen Daten?</h2>
 Die App läuft komplett im Browser – keine Installation nötig.
 Es werden keine persönlichen Daten erfasst, nichts wird gespeichert.
+
+Dieses Werk ist lizenziert unter CC BY‑NC‑ND 4.0.
+https://creativecommons.org/licenses/by-nc-nd/4.0/
 
 
 <h3> Projektkontext </h3>
